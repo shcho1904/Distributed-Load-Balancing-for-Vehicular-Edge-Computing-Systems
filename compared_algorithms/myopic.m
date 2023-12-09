@@ -1,4 +1,4 @@
-function [allo, total_time] = myopic(LOC_Veh_x, LOC_Veh_y, LOC_Rsu_x, LOC_Rsu_y, t_comm, t_comp_RSU, t_comp_local, RSU_Cpu_num, RSU_Cpu_frequency, time_thres, max_Veh)
+function [allo, total_time] = MY(LOC_Veh_x, LOC_Veh_y, LOC_Rsu_x, LOC_Rsu_y, t_comm, t_comp_RSU, t_comp_local, RSU_Cpu_num, RSU_Cpu_frequency, time_thres, max_Veh)
 %kmeans clustering
 %   1. Make N_Rsu cluster
 %   2. allocate RSU to closest kmeans center
