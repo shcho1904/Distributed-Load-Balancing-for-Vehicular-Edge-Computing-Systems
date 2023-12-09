@@ -32,21 +32,11 @@ RSU_coef = max(round(sum(t_comp_local)./sum(t_comp_RSU) -1),1).*RSU_Cpu_num;
 dual_ans = [RSU_coef, max(0, N_Veh - sum(RSU_coef))]*(N_Veh >= sum(RSU_Cpu_num)+10);
 
 for iter = 1:iter_num
-    
-%     for rsu_index = 1:N_Rsu
-%         rsu_sum(rsu_index) = sum(rmmissing((allo==rsu_index).*t_comp_RSU(:,rsu_index)'));
-%     end
     %vehicle section
-% 
     for veh_index = 1:N_Veh
         [~, allo(veh_index)] = min([((2 - p.*RSU_Cpu_num./(allo_num(allo,N_Rsu-1)+1)).*(1+p)/2.*t_comp_RSU(veh_index,:) ...
             + t_comm(veh_index,:) - mu(:,1:N_Rsu,iter)), t_comp_local(veh_index) - mu(:,N_Rsu+1,iter)]);
     end
-    
-%     for veh_index = 1:N_Veh
-%         [~, allo(veh_index)] = min([((1+p).*t_comp_RSU(veh_index,:) ...
-%             + t_comm(veh_index,:) - mu(:,1:N_Rsu,iter)), t_comp_local(veh_index) - mu(:,N_Rsu+1,iter)]);
-%     end
     
     %RSU section
 
