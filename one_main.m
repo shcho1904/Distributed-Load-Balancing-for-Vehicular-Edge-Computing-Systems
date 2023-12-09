@@ -34,7 +34,7 @@ for iter_one=1:10000
 %     
      [rm_allo, rm_time] = RM(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh);
      [be_allo, be_time] = BE(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh);
-     [my_allo, my_time] = myopic(LOC_Veh_x, LOC_Veh_y, LOC_Rsu_x, LOC_Rsu_y, t_comm, t_comp_RSU, t_comp_local, RSU_Cpu_num, Rsu_Cpu, Veh_max_time, max_Veh);
+     [my_allo, my_time] = MY(LOC_Veh_x, LOC_Veh_y, LOC_Rsu_x, LOC_Rsu_y, t_comm, t_comp_RSU, t_comp_local, RSU_Cpu_num, Rsu_Cpu, Veh_max_time, max_Veh);
      [pm_allo, mu] = prim_dual(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh, 30);
      pm_time = sum_time(pm_allo, t_comm, t_comp_RSU, t_comp_local, RSU_Cpu_num);
     % mp_time
