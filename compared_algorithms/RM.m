@@ -7,7 +7,7 @@ function [allo, total_time] = RM(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, 
 allo = zeros(1,N_Veh);
 avg_Cpu_num = sum(RSU_Cpu_num)/N_Rsu;
 
-eq_num = [min(Max_Veh, floor(2*RSU_Cpu_num)) Inf];
+eq_num = [min(Max_Veh, RSU_Cpu_num) Inf];
 %eq_num = min(Max_Veh,max(avg_Cpu_num,floor(N_Veh/N_Rsu)));
 %eq_num = [max(max(avg_Cpu_num,min(floor(N_Veh/N_Rsu))*ones(1,N_Rsu)), Max_Veh), Inf];
 min_time = Inf;
