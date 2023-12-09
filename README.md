@@ -11,4 +11,5 @@ In 'functions' file,
 3. delay_fun : calculates the objective function.
 4. get_max_time : calculate maximum value of delay.
 5. rank_msg : get k-th smallest value of the set, plz refer to our paper.
-6. etc : unnecessary files
+6. mp_sol : get set of x_{ia} which has the smallest objective function
+7. etc : unnecessary files
