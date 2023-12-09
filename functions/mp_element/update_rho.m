@@ -6,13 +6,13 @@ legit_matrix = cat(2, legit_matrix, ones(fun_N_Veh,1));
 %don't add 1 to N_Rsu because 
 for i = 1:fun_N_Veh
     for a = 1:fun_N_Rsu
+        %numerical issues
         if legit_matrix(i,a) == 1
             temp = alpha(i, :);
             rem_element = legit_matrix(i,:)==0;
             rem_element(a) = 1;
             temp(rem_element) = [];
-            %temp(a) = [];
-            %temp(legit_matrix(i,:) == 0) = [];
+
             if isempty(temp) == 0
                 rho(i, a) = -min(temp);
             end
@@ -20,5 +20,6 @@ for i = 1:fun_N_Veh
     end
 end
 
+%DAMPING=1 -> NO DAMPING
 rho_res = DAMPING*rho + (1 - DAMPING) * rho_old;
 end
