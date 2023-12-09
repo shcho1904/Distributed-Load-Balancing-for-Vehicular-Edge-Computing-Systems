@@ -1,4 +1,4 @@
-function [allo, total_time] = eq_load(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, Max_Veh)
+function [allo, total_time] = RM(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, Max_Veh)
 %   Compared Scheme : Greedy
 %   First, check the RSU's maximum constraint and current allocation
 %   Second, if there the RSU is not available, choose second best RSU or
