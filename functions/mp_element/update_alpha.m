@@ -7,20 +7,25 @@ alpha_old = alpha;
 alpha_one = zeros(fun_N_Veh, fun_N_Rsu_local);
 alpha_zero = zeros(fun_N_Veh, fun_N_Rsu_local);
 
+%preventing numerical issues
 legit_matrix = (t_comm+t_comp_RSU)<10000;
 
 %To avoid error when RSU's Max_Veh number is bigger than the whole number
 %of vehicle
 Ma = min(fun_N_Veh, max_Veh);
 
+%alpha(1)
 for i=1:fun_N_Veh
     for a=1:fun_N_Rsu_local-1
         if legit_matrix(i,a) == 1
             alpha_one_tmp = Inf;
             for u=1:Ma
+                %numerical issue
                 illegal_temp = 1 - legit_matrix(:,a);
                 illegal_temp(i) = 1;
                 illegal_temp = logical(illegal_temp);
+                
+                
                 tmp = delay_fun(u, RSU_Cpu_num(a),t_comp_RSU(i,a), t_comm(i,a)) + sum(rank_msg(u-1, delay_fun(u, RSU_Cpu_num(a), t_comp_RSU(:,a), t_comm(:,a)) + rho(:,a), illegal_temp));
                 if tmp < alpha_one_tmp
                     alpha_one_tmp = tmp;
@@ -29,17 +34,8 @@ for i=1:fun_N_Veh
             alpha_one(i,a) = alpha_one_tmp;
         end
     end
-    %Check whether Local
-    %alpha_one_Local_tmp = 0;
-    %The reason why l start from 2 : to reduce computation, alpha_one
-    %shares the same computation, alpha_one_Local_tmp = pi (below account)
-    %for u=2:fun_N_Veh-1
-        %tmp = sum(rank_msg(u-1, t_comp_local(i) + rho(:,a), i));
-        %if tmp < alpha_one_Local_tmp
-            %alpha_one_Local_tmp = tmp;
-        %end
-    %end
-    %alpha_one(i, fun_N_Rsu_local) = min(alpha_one_Local_tmp,0);
+
+    %local computing mode update
     local_tmp_one = Inf;
     for u=1:fun_N_Veh
         tmp = t_comp_local(i) + sum(rank_msg(u-1, t_comp_local + rho(:,fun_N_Rsu_local), i));
@@ -50,6 +46,7 @@ for i=1:fun_N_Veh
     alpha_one(i,fun_N_Rsu_local) = local_tmp_one;
 end
 
+%alpha(0)
 for i=1:fun_N_Veh
     for a=1:fun_N_Rsu_local-1
         if legit_matrix(i,a) == 1
@@ -64,9 +61,8 @@ for i=1:fun_N_Veh
             alpha_zero(i,a) = alpha_zero_tmp;
         end
     end
-    %Check whether Local
-    %To remove redundancy : min(0,pi) - min(-f_{ia}, pi, \sum rank^l
-    %[f+\rho]
+
+    %local computing mode update
     local_tmp_zero = 0;
     for u=1:fun_N_Veh
         %tmp = t_comp_local(i) + sum(rank_msg(u, t_comp_local + rho(:,fun_N_Rsu_local), i));
@@ -76,7 +72,6 @@ for i=1:fun_N_Veh
         end
     end
     alpha_zero(i, fun_N_Rsu_local) = local_tmp_zero;
-    %alpha_zero(i, fun_N_Rsu_local) = min(min(min(alpha_one_Local_tmp), -t_comp_local(i)), sum(rank_msg(Ma, t_comp_local, i)));
 end
 alpha = alpha_one - alpha_zero;
 alpha_res = alpha*DAMPING + alpha_old*(1 - DAMPING);
