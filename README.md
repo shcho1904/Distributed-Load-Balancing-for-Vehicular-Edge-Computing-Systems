@@ -12,3 +12,5 @@ In 'functions' file,
 4. get_max_time : calculate maximum value of delay.
 5. rank_msg : get k-th smallest value of the set, plz refer to our paper.
 6. etc : unnecessary files
+
+In our paper, even though there are codes for damping, we do not use damping since it aggravates the performance of our algorithm (damping=1).
