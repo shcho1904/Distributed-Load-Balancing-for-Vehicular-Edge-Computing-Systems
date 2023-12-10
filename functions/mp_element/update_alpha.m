@@ -52,7 +52,6 @@ for i=1:fun_N_Veh
         if legit_matrix(i,a) == 1
             alpha_zero_tmp = 0;
             for u=1:Ma
-                %tmp = delay_fun(u, RSU_Cpu_num(a),t_comp_RSU(i,a), t_comm(i,a)) + sum(rank_msg(u, delay_fun(u, RSU_Cpu_num(a), t_comp_RSU(:,a), t_comm(:,a)) + rho(:,a), i));
                 tmp = sum(rank_msg(u, delay_fun(u, RSU_Cpu_num(a), t_comp_RSU(:,a), t_comm(:,a)) + rho(:,a), i));
                 if tmp < alpha_zero_tmp
                     alpha_zero_tmp = tmp;
@@ -65,7 +64,6 @@ for i=1:fun_N_Veh
     %local computing mode update
     local_tmp_zero = 0;
     for u=1:fun_N_Veh
-        %tmp = t_comp_local(i) + sum(rank_msg(u, t_comp_local + rho(:,fun_N_Rsu_local), i));
         tmp = sum(rank_msg(u, t_comp_local + rho(:,fun_N_Rsu_local), i));
         if tmp < local_tmp_zero
             local_tmp_zero = tmp;
