@@ -9,9 +9,7 @@ function [best_allo, mu] = prim_dual(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_n
 % Thrid, update n_a using \sum T_{ia}x_{ia} and mu_a
 % Finally, update mu, step size is 0.1
 
-% Optimal Setting
-% : step size : 0.001, initial mu = -0.2
-%------------------
+%------------------------------------------------------------------------------------------------------------
 
 
 %initalize
@@ -19,16 +17,13 @@ function [best_allo, mu] = prim_dual(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_n
 step_size = 0.0001;
 [~, allo] = min([t_comm + t_comp_RSU, t_comp_local], [], 2);
 mu = 0.4*ones(1, N_Rsu+1, iter_num+1);
-%pd_allo_num = [allo_num(allo, N_Rsu-1), ones(1, N_Rsu-1, iter_num)]; %n_a
 pd_allo_num = ones(1,N_Rsu+1, iter_num);
 pd_allo_num(:,:,1) = allo_num(allo, N_Rsu);
-%rsu_sum = zeros(1,N_Rsu);
 best_allo = allo;
 p = floor(allo_num(allo, N_Rsu-1)./RSU_Cpu_num);
 
 %initialization
 RSU_coef = max(round(sum(t_comp_local)./sum(t_comp_RSU) -1),1).*RSU_Cpu_num;
-%dual_ans = [RSU_coef, max(0, N_Veh - sum(RSU_coef))]*(N_Veh >= sum(RSU_Cpu_num)+10) + [RSU_Cpu_num,max(0, N_Veh - sum(RSU_coef))]*(N_Veh < sum(RSU_Cpu_num)+10) ;
 dual_ans = [RSU_coef, max(0, N_Veh - sum(RSU_coef))]*(N_Veh >= sum(RSU_Cpu_num)+10);
 
 for iter = 1:iter_num
