@@ -1,4 +1,4 @@
-# Distributed-Load-Balancing-for-Vehicular-Edge-Computing-Systems
+# Distributed Task Allocation in Vehicular Parallel Edge Computing Networks
 
 There are several folders :
 1. compared_algorithms : contains BE(Best-effort), RM(Resource-constrained minimization), MY(Myopic), Primal-dual(Convex optimization) and Exhaustive search for CDF.
