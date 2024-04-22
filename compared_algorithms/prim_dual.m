@@ -1,13 +1,7 @@
 function [best_allo, mu] = prim_dual(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh, iter_num)
 % comparing scheme : primal-dual algorithm
 % Because of the difficulty to deal with
-% p_a = \floor(n_a/k_a), I assume that p_a is consistent.
-% First, find p_a using heuristic algorithm(e.g. greedy), initalizing mu_a
-% as -0.25(mu should be negative if not, n_a will be 0, reason will be
-% described below.)
-% Second, find a* in vehicle section
-% Thrid, update n_a using \sum T_{ia}x_{ia} and mu_a
-% Finally, update mu, step size is 0.1
+
 
 %------------------------------------------------------------------------------------------------------------
 
