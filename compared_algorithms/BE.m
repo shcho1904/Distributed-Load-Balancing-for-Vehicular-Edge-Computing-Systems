@@ -1,4 +1,4 @@
-function [allo, total_time] = BE(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh)
+function [allo, total_time] = GE(t_comm, t_comp_local, t_comp_RSU, RSU_Cpu_num, max_Veh)
 %   Compared Scheme : Greedy
 %   First, check the RSU's maximum constraint and current allocation
 %   Second, if there the RSU is not available, choose second best RSU or
